@@ -74,18 +74,38 @@ function App() {
   useEffect(() => {
     // Verificar sesión de Supabase al cargar
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAuthenticated(!!session)
-    })
+      setIsAuthenticated(!!session);
+      const userEmail = session?.user?.email;
+      if (userEmail) {
+        setEmail(userEmail);
+        setUserData(prev => ({
+          ...prev,
+          email: userEmail,
+          balance: 50,
+          hasClaimed: false
+        }));
+      }
+    });
 
     // Suscribirse a cambios en la autenticación
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(!!session)
-    })
+      setIsAuthenticated(!!session);
+      const userEmail = session?.user?.email;
+      if (userEmail) {
+        setEmail(userEmail);
+        setUserData(prev => ({
+          ...prev,
+          email: userEmail,
+          balance: 50,
+          hasClaimed: false
+        }));
+      }
+    });
 
-    return () => subscription.unsubscribe()
-  }, [])
+    return () => subscription.unsubscribe();
+  }, []);
 
   const connect = async () => {
     if (!wallet) {
@@ -209,7 +229,9 @@ function App() {
   const handleAuthSuccess = () => {
     setUserData(prev => ({
       ...prev,
-      email: email
+      email: email,
+      balance: 50, // Establecemos el balance inicial
+      hasClaimed: false
     }));
     setIsAuthenticated(true);
   }

@@ -45,46 +45,59 @@ export function Dashboard({ userData }: DashboardProps) {
       {/* Account Info */}
       <div className="dashboard-section">
         <div className="dashboard-title">
-          <User className="w-5 h-5" />
-          <span>Account Info</span>
+          <User size={20} />
+          Account Info
         </div>
-        <div className="dashboard-value">Membership pending</div>
-        <div className="dashboard-subtitle">{userData.email}</div>
+        <div className="dashboard-value">
+          {userData.email || 'Membership pending'}
+        </div>
+        <div className="dashboard-subtitle">
+          {userData.email ? 'Email verificado' : 'Email pendiente de verificación'}
+        </div>
       </div>
 
       {/* Streak Information */}
       <div className="dashboard-section">
         <div className="dashboard-title">
-          <Trophy className="w-5 h-5" />
-          <span>Streak Information</span>
+          <Trophy size={20} />
+          Streak Information
         </div>
         <div className="dashboard-value">0</div>
-        <div className="dashboard-subtitle">Streaks maintained</div>
-        <div className="dashboard-subtitle">Last streak: N/A</div>
+        <div className="dashboard-subtitle">
+          Streaks maintained
+        </div>
+        <div className="dashboard-subtitle">
+          Last streak: N/A
+        </div>
       </div>
 
       {/* Balance */}
       <div className="dashboard-section">
         <div className="dashboard-title">
-          <Coins className="w-5 h-5" />
-          <span>Balance</span>
+          <Coins size={20} />
+          Balance
         </div>
         <div className="dashboard-value">50 tokens</div>
-        <div className="dashboard-subtitle">Available for use</div>
+        <div className="dashboard-subtitle">
+          Available for use
+        </div>
       </div>
 
       {/* Claim Status */}
       <div className="dashboard-section claim-section">
         <div className="claim-status-header">
-          <div className="dashboard-title">Claim Status</div>
-          <div className="dashboard-subtitle">Not eligible for claiming</div>
+          <div className="dashboard-title">
+            Claim Status
+          </div>
+          <div className="dashboard-subtitle">
+            Not eligible for claiming
+          </div>
         </div>
         <div className="claim-button-container">
-          <button
-            disabled={true}
-            className="claim-button"
-          >
-            <Check className="w-4 h-4" />
+          <button className="claim-button" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             Claim
           </button>
         </div>
